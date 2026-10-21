@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@id/chartFragment">
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/chartFragment"
+        android:id="@+id/cartFragment"
         android:name="com.example.myshop.ChartFragment"
         android:label="fragment_chart"
-        tools:layout="@layout/fragment_chart" />
+        tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.myshop.HomeFragment"
@@ -27,5 +27,49 @@
         android:id="@+id/checkoutFragment"
         android:name="com.example.myshop.CheckoutFragment"
         android:label="fragment_checkout"
-        tools:layout="@layout/fragment_checkout" />
+        tools:layout="@layout/fragment_checkout" >
+        <argument
+            android:name="productName"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment2"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment3"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment4"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment5"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment6"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment7"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment8"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment9"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressFragment10"
+            app:destination="@id/addressFragment" />
+    </fragment>
+    <argument
+        android:name="productName"
+        app:argType="string"
+        app:nullable="true" />
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.myshop.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" />
 </navigation>
