@@ -1,18 +1,18 @@
-
 package com.example.myshop
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myshop.databinding.FragmentCheckoutBinding
 
 class CheckoutFragment : Fragment() {
+
+    private var _binding: FragmentCheckoutBinding? = null
+    private val binding get() = _binding!!
 
     private val args: CheckoutFragmentArgs by navArgs()
 
@@ -21,48 +21,48 @@ class CheckoutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        val view = inflater.inflate(
-            R.layout.fragment_checkout,
-            container,
-            false
+        _binding = FragmentCheckoutBinding.inflate(
+            inflater, container, false
         )
+        return binding.root
+    }
 
-        // Mengambil nama produk dari HomeFragment
-        val txtProductName =
-            view.findViewById<TextView>(R.id.txtProductName)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
 
-        txtProductName.text = args.productName
+        with(binding) {
+            val args: CheckoutFragmentArgs by navArgs()
+            txtProductName.text = args.productName
 
-        // Mengambil kolom alamat
-        val edtAddress =
-            view.findViewById<EditText>(R.id.edt_address)
+            // Membuka AddressFragment saat kolom alamat diklik
+            edtAddress.setOnClickListener {
+                val action =
+                    CheckoutFragmentDirections
+                        .actionCheckoutFragmentToAddressFragment3()
 
-        // Membuka AddressFragment saat kolom alamat diklik
-        edtAddress.setOnClickListener {
-            val action =
-                CheckoutFragmentDirections
-                    .actionCheckoutFragmentToAddressFragment3()
-
-            findNavController().navigate(action)
-        }
-
-
-        findNavController().currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<String>("address")
-            ?.observe(viewLifecycleOwner) { res ->
-                edtAddress.setText(res)
+                findNavController().navigate(action)
             }
 
-        val btnDone =
-            view.findViewById<Button>(R.id.btn_done)
+            // Menerima alamat dari AddressFragment
+            findNavController().currentBackStackEntry
+                ?.savedStateHandle
+                ?.getLiveData<String>("address")
+                ?.observe(viewLifecycleOwner) { res ->
+                    binding.edtAddress.setText(res)
+                }
 
-        btnDone.setOnClickListener {
-            findNavController().navigateUp()
+            // Kembali ke halaman sebelumnya
+            btnDone.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
+    }
 
-
-        return view
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

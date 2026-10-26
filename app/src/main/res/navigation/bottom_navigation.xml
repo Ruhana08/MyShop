@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.myshop.ChartFragment"
+        android:name="com.example.myshop.CartFragment"
         android:label="fragment_chart"
         tools:layout="@layout/fragment_cart" />
     <fragment
@@ -55,12 +55,6 @@
             app:destination="@id/addressFragment" />
         <action
             android:id="@+id/action_checkoutFragment_to_addressFragment8"
-            app:destination="@id/addressFragment" />
-        <action
-            android:id="@+id/action_checkoutFragment_to_addressFragment9"
-            app:destination="@id/addressFragment" />
-        <action
-            android:id="@+id/action_checkoutFragment_to_addressFragment10"
             app:destination="@id/addressFragment" />
     </fragment>
     <argument

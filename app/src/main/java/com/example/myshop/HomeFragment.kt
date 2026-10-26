@@ -19,19 +19,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        binding.btnBuy.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("productName", "Samsung M22")
-            }
-
-            findNavController().navigate(
-                R.id.action_homeFragment_to_checkoutFragment,
-                bundle
-            )
-        }
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            val action =
+                HomeFragmentDirections
+                    .actionHomeFragmentToCheckoutFragment(
+                    txtProduct.text.toString()
+                )
+
+            btnBuy.setOnClickListener {
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onDestroyView() {
